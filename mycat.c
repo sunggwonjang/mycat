@@ -127,6 +127,17 @@ int main (int argc, char* argv[])
 	int isLine = FALSE, isTab = FALSE, isHead = FALSE;
 	int nTab = 0, opt, i;
 
+	const char* env = getenv ("TAB");
+	if (env != NULL)
+	{
+		i = atoi (env);
+		if (i > 0)
+		{
+			nTab = i;
+			isTab = TRUE;
+		}
+	}
+
 	while ((opt = getopt (argc, argv, "hlt:")) != -1) {
 		switch (opt) {
 			case 'h' :
@@ -137,7 +148,7 @@ int main (int argc, char* argv[])
 				break;
 			case 't' :
 				nTab = atoi (optarg);
-				if (nTab > 0 && nTab < 9)
+				if (nTab > 0)
 				{
 					isTab = TRUE;
 					break;
